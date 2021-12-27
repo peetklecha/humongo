@@ -1,0 +1,5 @@
+aggregate users:
+	sort:
+		signup_date asc
+		order_count desc
+		tags text

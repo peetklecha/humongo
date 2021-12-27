@@ -1,0 +1,3 @@
+aggregate users:
+	match if size(orders) > 10
+	match if _id == codename

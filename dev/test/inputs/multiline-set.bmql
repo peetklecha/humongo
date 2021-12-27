@@ -1,0 +1,4 @@
+aggregate users:
+	set:
+		name = "john"
+		age = 47

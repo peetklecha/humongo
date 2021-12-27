@@ -1,0 +1,2 @@
+aggregate users:
+	set name = "john"

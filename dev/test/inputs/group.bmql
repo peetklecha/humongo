@@ -1,0 +1,4 @@
+aggregate users:
+	group by signup_date:
+		count = sum(1)
+		list = push($$ROOT)

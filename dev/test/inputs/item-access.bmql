@@ -1,0 +1,2 @@
+aggregate users:
+	set first_order = orders[0]

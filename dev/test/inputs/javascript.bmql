@@ -1,0 +1,2 @@
+aggregate users:
+	match date < 'moment().subtract(5, "days").toDate()'

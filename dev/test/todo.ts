@@ -1,0 +1,38 @@
+export default {
+	"aggregation_stages": [
+		"one-line-match",
+		"multiline-match",
+		"one-line-set",
+		"multiline-set",
+		"limit",
+		"match-set-limit",
+		"project",
+		"import-verbose",
+		"import-compact",
+		"import-one",
+		"count",
+		"count-by-group",
+		"count-as-alias",
+		"group",
+		"unwind",
+		"js-stage",
+		"sort",
+		"match-if"
+	],
+	"expressions": [
+		"cast",
+		"funcs",
+		"object-literals",
+		"array-literals",
+		"complex-funcs",
+		"conditional",
+		"item-access",
+		"map",
+		"dot-access",
+		"dates",
+		"objectids",
+		"javascript",
+		"in",
+	],
+	"query_ops": []
+}

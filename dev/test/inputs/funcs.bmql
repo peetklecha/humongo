@@ -1,0 +1,5 @@
+aggregate things:
+	set:
+		xyz = cos(abc)
+		abc = split(name, ",")
+		def = all(one, two, three, four)

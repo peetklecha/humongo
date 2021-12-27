@@ -1,0 +1,2 @@
+aggregate things:
+	set tag = size(things) > 5 ? "big" : "small"

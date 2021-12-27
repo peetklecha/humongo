@@ -1,0 +1,2 @@
+aggregate users:
+	set price = cost as Decimal

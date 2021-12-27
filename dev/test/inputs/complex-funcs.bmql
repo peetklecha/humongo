@@ -1,0 +1,2 @@
+aggregate users:
+	set pairs = zip({ inputs: [orders, transactions], useLongestLength: true })

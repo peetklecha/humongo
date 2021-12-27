@@ -1,0 +1,2 @@
+aggregate users:
+	match name @ ["john", "fred", "george"]

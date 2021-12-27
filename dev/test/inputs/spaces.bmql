@@ -1,0 +1,4 @@
+aggregate users:
+  match name = "john"
+  set thing = 7
+  match other_thing = "yolo"

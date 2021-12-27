@@ -1,0 +1,4 @@
+aggregate users:
+	match name = "fred"
+	'{ $set: { tags: { $concat: ["$tags", ", checked"] } } }'
+	unwind orders

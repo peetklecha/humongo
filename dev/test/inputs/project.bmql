@@ -1,0 +1,5 @@
+aggregate users:
+	project:
+		age, birth_date
+		name = last_name
+		address = street_address_1

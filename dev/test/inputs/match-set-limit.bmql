@@ -1,0 +1,4 @@
+aggregate users:
+	match timestamp < "2021-08-23", > "2021-08-15"
+	limit 10000
+	set checked = true

@@ -1,0 +1,6 @@
+aggregate users:
+	project:
+		orders = map({
+			input: orders,
+			in: $$this.id
+		})

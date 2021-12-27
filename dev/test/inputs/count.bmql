@@ -1,0 +1,3 @@
+aggregate users:
+	match name = "Fred"
+	count

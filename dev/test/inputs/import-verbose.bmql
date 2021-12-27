@@ -1,0 +1,3 @@
+aggregate users:
+	import subs from subscriptions by customerId using _id
+

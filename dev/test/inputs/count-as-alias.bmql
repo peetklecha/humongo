@@ -1,0 +1,2 @@
+aggregate users:
+	count as user_count
