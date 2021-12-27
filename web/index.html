@@ -1,0 +1,582 @@
+
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Humongo</title>
+		<link rel="stylesheet" href="index.css" />
+		<script src="bundle.js" defer></script>
+		<script src="web.js" defer></script>
+	</head>
+	<body>
+		<div class="header">
+			<h1 id="main-banner">Humongo</h1>
+			<h3 id="main-subtitle">Mongo for humans</h3>
+		</div>
+		<div class="nav">
+			<!-- <a href="/">Try it out</a>
+			<a href="/docs">Docs</a> -->
+		</div>
+		<p>Humongo is a little language for writing <a href="https://docs.mongodb.com/manual/aggregation/">MongoDB aggregation queries</a> a little more tersely. Not every Mongo feature is supported, but keep in mind that it is possible to write raw queries and interpolate them with Humongo. Scroll down for docs.<br /><br />Write your query here to compile to JS: </p>
+		<textarea id="humongo">aggregate orders:
+	match purchase_date > @@2021-08-15, < @@2021-08-23
+	set line_item_ids = map({ input: line_items, in: $$this.product_id })
+	import products using line_item_ids
+	set label = size(line_items) < 6 ? "small" : (size(line_items) >= 12 ? "large" : "medium")
+	project line_item_ids, label, tags, customer_id
+		</textarea>
+		<button id="compile">Compile</button>
+		<h4 id="output-header">Mongo output</h4>
+		<div id="mongo">db.getCollection("orders").aggregate([
+  { $match: {
+    purchase_date: { $gt: ISODate("2021-08-15"), $lt: ISODate("2021-08-23") }] },
+  } },
+  { $set:  {
+    line_item_ids: { $map: { input: "$line_items", in: "$$this.product_id" } },
+  } },
+  { $lookup: {
+    from: "products",
+    localField: "line_item_ids",
+    foreignField: "_id",
+    as: "products",
+  } },
+  { $set: {
+    label: { $cond: {
+      if: { $lt: [{ $size: "$line_items" }, 6] },
+      then: "small", else: { $cond: {
+        if: { $gte: [{ $size: "$line_items" }, 12] },
+        then: "large",
+        else: "medium"
+      } }
+    } },
+  } },
+   { $project: {
+    line_item_ids: true,
+    label: true,
+    tags: true,
+    customer_id: true,
+  } }
+])</div>
+		<hr />
+		<h1>Docs</h1>
+<h1>Aggregation Stages</h1>
+<div class="doc-section">
+	<h2>$count</h2>
+<div class="doc-subsection">
+<p>Default to labelling the field "count":</p>
+
+	<h4>Humongo input</h4>
+	<div class="humongo-example">
+aggregate users:
+	match name = "Fred"
+	count
+
+	</div>
+	<h4>JS/Mongo query language output</h4>
+	<div class="mongo-example">
+db.getCollection("users").aggregate([
+	{ $match: {
+		name: { $eq: "Fred" },
+	} },
+	{ $count: "count" }
+])
+
+	</div>
+
+<br /><p>Specify the field name:</p>
+
+	<h4>Humongo input</h4>
+	<div class="humongo-example">
+aggregate users:
+	count as user_count
+
+	</div>
+	<h4>JS/Mongo query language output</h4>
+	<div class="mongo-example">
+db.getCollection("users").aggregate([
+	{ $count: "user_count" }
+])
+
+	</div>
+	</div>	<h2>$group</h2>
+<div class="doc-subsection">
+
+	<h4>Humongo input</h4>
+	<div class="humongo-example">
+aggregate users:
+	group by signup_date:
+		count = sum(1)
+		list = push($$ROOT)
+
+	</div>
+	<h4>JS/Mongo query language output</h4>
+	<div class="mongo-example">
+db.getCollection("users").aggregate([
+	{ $group: {
+		_id: "$signup_date",
+		count: { $sum: 1 },
+		list: { $push: "$$ROOT" },
+	} }
+])
+
+	</div>	</div>	<h2>$limit</h2>
+<div class="doc-subsection">
+
+	<h4>Humongo input</h4>
+	<div class="humongo-example">
+aggregate users:
+	limit 1000
+
+	</div>
+	<h4>JS/Mongo query language output</h4>
+	<div class="mongo-example">
+db.getCollection("users").aggregate([
+	{ $limit: 1000 }
+])
+
+	</div>	</div>	<h2>$lookup</h2>
+<div class="doc-subsection">
+<p>Called 'import' in Humongo:</p>
+
+	<h4>Humongo input</h4>
+	<div class="humongo-example">
+aggregate users:
+	import subs from subscriptions by customerId using _id
+
+
+	</div>
+	<h4>JS/Mongo query language output</h4>
+	<div class="mongo-example">
+db.getCollection("users").aggregate([
+	{ $lookup: { 
+		from: "subscriptions",
+		localField: "_id",
+		foreignField: "customerId",
+		as: "subs",
+	} }
+])
+
+	</div>
+
+<br /><p>Omitting the collection name will cause collection name to be the same as the new field name. Omitting the localField will cause the localField to be the same as the collection name. Omitting foreignField defaults to '_id'.</p>
+
+	<h4>Humongo input</h4>
+	<div class="humongo-example">
+aggregate users:
+	import subscriptions
+
+	</div>
+	<h4>JS/Mongo query language output</h4>
+	<div class="mongo-example">
+db.getCollection("users").aggregate([
+	{ $lookup: { 
+		from: "subscriptions",
+		localField: "subscriptions",
+		foreignField: "_id",
+		as: "subscriptions",
+	} }
+])
+
+	</div>
+
+<br /><p>To import a single element, use 'import one'.</p>
+
+	<h4>Humongo input</h4>
+	<div class="humongo-example">
+aggregate users:
+	import one order from orders using orderIds
+
+	</div>
+	<h4>JS/Mongo query language output</h4>
+	<div class="mongo-example">
+db.getCollection("users").aggregate([
+	{ $lookup: { 
+		from: "orders",
+		localField: "orderIds",
+		foreignField: "_id",
+		as: "order",
+	} },
+	{ $set: {
+		order: { $arrayElemAt: ["$order", 0] },
+	} }
+])
+
+	</div>
+	</div>	<h2>$match</h2>
+<div class="doc-subsection">
+<p>Tersely, on one line:</p>
+
+	<h4>Humongo input</h4>
+	<div class="humongo-example">
+aggregate subscriptions:
+	match name = "john"
+
+	</div>
+	<h4>JS/Mongo query language output</h4>
+	<div class="mongo-example">
+db.getCollection("subscriptions").aggregate([
+	{ $match: {
+		name: { $eq: "john" },
+	} }
+])
+
+	</div>
+
+<br /><p>Or spread across multiple lines:</p>
+
+	<h4>Humongo input</h4>
+	<div class="humongo-example">
+aggregate subscriptions:
+	match:
+		name = "john"
+		timestamp < "2021-08-23", > "2021-08-15"
+
+	</div>
+	<h4>JS/Mongo query language output</h4>
+	<div class="mongo-example">
+db.getCollection("subscriptions").aggregate([
+	{ $match: {
+		name: { $eq: "john" },
+		timestamp: { $and: [{ $lt: "2021-08-23" }, { $gt: "2021-08-15" }] },
+	} }
+])
+
+	</div>
+	</div>	<h2>$project</h2>
+<div class="doc-subsection">
+<p>Fields that should be directly projected can be listed on one line separated by commas.</p>
+
+	<h4>Humongo input</h4>
+	<div class="humongo-example">
+aggregate users:
+	project:
+		age, birth_date
+		name = last_name
+		address = street_address_1
+
+	</div>
+	<h4>JS/Mongo query language output</h4>
+	<div class="mongo-example">
+db.getCollection("users").aggregate([
+	{ $project: {
+		age: true,
+		birth_date: true,
+		name: "$last_name",
+		address: "$street_address_1",
+	} }
+])
+
+	</div>
+	</div>	<h2>$set</h2>
+<div class="doc-subsection">
+<p>Tersely, on one line:</p>
+
+	<h4>Humongo input</h4>
+	<div class="humongo-example">
+aggregate users:
+	set name = "john"
+
+	</div>
+	<h4>JS/Mongo query language output</h4>
+	<div class="mongo-example">
+db.getCollection("users").aggregate([
+	{ $set: {
+		name: "john",
+	} }
+])
+
+	</div>
+
+<br /><p>Or spread across multiple lines:</p>
+
+	<h4>Humongo input</h4>
+	<div class="humongo-example">
+aggregate users:
+	set:
+		name = "john"
+		age = 47
+
+	</div>
+	<h4>JS/Mongo query language output</h4>
+	<div class="mongo-example">
+db.getCollection("users").aggregate([
+	{ $set: {
+		name: "john",
+		age: 47,
+	} }
+])
+
+	</div>
+	</div>	<h2>$sortByCount</h2>
+<div class="doc-subsection">
+
+	<h4>Humongo input</h4>
+	<div class="humongo-example">
+aggregate users:
+	count by size(orders)
+
+	</div>
+	<h4>JS/Mongo query language output</h4>
+	<div class="mongo-example">
+db.getCollection("users").aggregate([
+	{ $sortByCount: { $size: "$orders" } }
+])
+
+	</div>	</div>	<h2>$unwind</h2>
+<div class="doc-subsection">
+
+	<h4>Humongo input</h4>
+	<div class="humongo-example">
+aggregate users:
+	unwind orders
+
+	</div>
+	<h4>JS/Mongo query language output</h4>
+	<div class="mongo-example">
+db.getCollection("users").aggregate([
+	{ $unwind: "$orders" }
+])
+
+	</div>	</div>	<h2>Interpolate raw JavaScript</h2>
+<div class="doc-subsection">
+<p>Use single-quotes to interpolate raw JavaScript (or anything else).</p>
+
+	<h4>Humongo input</h4>
+	<div class="humongo-example">
+aggregate users:
+	match name = "fred"
+	'{ $set: { tags: { $concat: ["$tags", ", checked"] } } }'
+	unwind orders
+
+	</div>
+	<h4>JS/Mongo query language output</h4>
+	<div class="mongo-example">
+db.getCollection("users").aggregate([
+	{ $match: {
+		name: { $eq: "fred" },
+	} },
+	{ $set: { tags: { $concat: ["$tags", ", checked"] } } },
+	{ $unwind: "$orders" }
+])
+
+	</div>
+	</div></div><h1>Expressions</h1>
+<div class="doc-section">
+	<h2>Array Element Access</h2>
+<div class="doc-subsection">
+<p>Use C-style array element access.</p>
+
+	<h4>Humongo input</h4>
+	<div class="humongo-example">
+aggregate users:
+	set first_order = orders[0]
+
+	</div>
+	<h4>JS/Mongo query language output</h4>
+	<div class="mongo-example">
+db.getCollection("users").aggregate([
+	{ $set: {
+		first_order: { $arrayElemAt: ["$orders", 0] },
+	} }
+])
+
+	</div>
+	</div>	<h2>Array and object literals</h2>
+<div class="doc-subsection">
+<p>Array and object literals work like you expect.</p>
+
+	<h4>Humongo input</h4>
+	<div class="humongo-example">
+aggregate items:
+	set list = [ 1, 2, "thing", { stuff: "junk" } ]
+
+	</div>
+	<h4>JS/Mongo query language output</h4>
+	<div class="mongo-example">
+db.getCollection("items").aggregate([
+	{ $set: {
+		list: [1, 2, "thing", { stuff: "junk" }],
+	} }
+])
+
+	</div>
+
+<br /><p></p>
+
+	<h4>Humongo input</h4>
+	<div class="humongo-example">
+aggregate users:
+	set order = { dog: "fido", cat: "snuffles" }
+
+	</div>
+	<h4>JS/Mongo query language output</h4>
+	<div class="mongo-example">
+db.getCollection("users").aggregate([
+	{ $set: {
+		order: { dog: "fido", cat: "snuffles" },
+	} }
+])
+
+	</div>
+	</div>	<h2>Complex Operators</h2>
+<div class="doc-subsection">
+<p>For MongoDB operators that require a spec object, simply pass the object using function notation.</p>
+
+	<h4>Humongo input</h4>
+	<div class="humongo-example">
+aggregate users:
+	project:
+		orders = map({
+			input: orders,
+			in: $$this.id
+		})
+
+	</div>
+	<h4>JS/Mongo query language output</h4>
+	<div class="mongo-example">
+db.getCollection("users").aggregate([
+	{ $project: {
+		orders: { $map: { input: "$orders", in: "$$this.id" } },
+	} }
+])
+
+	</div>
+	</div>	<h2>Conditionals</h2>
+<div class="doc-subsection">
+<p>Use C-style ternary syntax for conditional expressions.</p>
+
+	<h4>Humongo input</h4>
+	<div class="humongo-example">
+aggregate things:
+	set tag = size(things) > 5 ? "big" : "small"
+
+	</div>
+	<h4>JS/Mongo query language output</h4>
+	<div class="mongo-example">
+db.getCollection("things").aggregate([
+	{ $set: {
+		tag: { $cond: { if: { $gt: [{ $size: "$things" }, 5] }, then: "big", else: "small" } },
+	} }
+])
+
+	</div>
+	</div>	<h2>Dates</h2>
+<div class="doc-subsection">
+<p>Date literals consist of @@ followed by a date in ISO format.</p>
+
+	<h4>Humongo input</h4>
+	<div class="humongo-example">
+aggregate orders:
+	match purchase_date <= @@2021-08-15, > @@2021-08-07
+
+	</div>
+	<h4>JS/Mongo query language output</h4>
+	<div class="mongo-example">
+db.getCollection("orders").aggregate([
+	{ $match: {
+		purchase_date: { $and: [{ $lte: ISODate("2021-08-15") }, { $gt: ISODate("2021-08-07") }] },
+	} }
+])
+
+	</div>
+	</div>	<h2>Functions</h2>
+<div class="doc-subsection">
+<p>Most operators are verbatim from MongoDB, using standard function invocation notation. Note that 'all' and 'any' alias 'allElementsTrue' and 'anyElementTrue'. And some operators that require an extra array wrapping do not require it in Humongo.</p>
+
+	<h4>Humongo input</h4>
+	<div class="humongo-example">
+aggregate things:
+	set:
+		xyz = cos(abc)
+		abc = split(name, ",")
+		def = all(one, two, three, four)
+
+	</div>
+	<h4>JS/Mongo query language output</h4>
+	<div class="mongo-example">
+db.getCollection("things").aggregate([
+	{ $set: {
+		xyz: { $cos: "$abc" },
+		abc: { $split: ["$name", ","] },
+		def: { $allElementsTrue: ["$one", "$two", "$three", "$four"] },
+	} }
+])
+
+	</div>
+	</div>	<h2>Interpolating JavaScript</h2>
+<div class="doc-subsection">
+<p>Use single quotes to interpolate JavaScript in the place of any valid expression.</p>
+
+	<h4>Humongo input</h4>
+	<div class="humongo-example">
+aggregate users:
+	match date < 'moment().subtract(5, "days").toDate()'
+
+	</div>
+	<h4>JS/Mongo query language output</h4>
+	<div class="mongo-example">
+db.getCollection("users").aggregate([
+	{ $match: {
+		date: { $lt: moment().subtract(5, "days").toDate() },
+	} }
+])
+
+	</div>
+	</div>	<h2>ObjectIDs</h2>
+<div class="doc-subsection">
+<p>ObjectID literals begin with '#' followed by 12 hexadecimal digits</p>
+
+	<h4>Humongo input</h4>
+	<div class="humongo-example">
+aggregate users:
+	match _id = #111111111111
+
+	</div>
+	<h4>JS/Mongo query language output</h4>
+	<div class="mongo-example">
+db.getCollection("users").aggregate([
+	{ $match: {
+		_id: { $eq: ObjectId("111111111111") },
+	} }
+])
+
+	</div>
+	</div>	<h2>Operators</h2>
+<div class="doc-subsection">
+<p>Most operators (+, -, <) work like you'd expect. Note that '@' aliases Mongo's '$in' (both in query operations and expressions)</p>
+
+	<h4>Humongo input</h4>
+	<div class="humongo-example">
+aggregate users:
+	match name @ ["john", "fred", "george"]
+
+	</div>
+	<h4>JS/Mongo query language output</h4>
+	<div class="mongo-example">
+db.getCollection("users").aggregate([
+	{ $match: {
+		name: { $in: ["john", "fred", "george"] },
+	} }
+])
+
+	</div>
+	</div>	<h2>Type conversion</h2>
+<div class="doc-subsection">
+<p>Use `as` to convert to different types (as well as Upper and Lower case).</p>
+
+	<h4>Humongo input</h4>
+	<div class="humongo-example">
+aggregate users:
+	set price = cost as Decimal
+
+	</div>
+	<h4>JS/Mongo query language output</h4>
+	<div class="mongo-example">
+db.getCollection("users").aggregate([
+	{ $set: {
+		price: { $toDecimal: "$cost" },
+	} }
+])
+
+	</div>
+	</div></div>
+</body></html>

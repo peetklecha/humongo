@@ -1,0 +1,54 @@
+textarea {
+	width: 990px;
+	height: 25vh;
+	font-family: "Courier New", Courier, monospace;
+}
+
+#mongo {
+	white-space: pre;
+	font-family: "Courier New", Courier, monospace;
+}
+
+.mongo-example,
+.humongo-example,
+#mongo {
+	white-space: pre;
+	font-family: "Courier New", Courier, monospace;
+	background: rgb(230, 229, 229);
+	border-radius: 5px;
+	border: gray solid 2px;
+	padding: 0.5em 2em 0.5em 2em;
+	width: calc(990px - 4em);
+	overflow-y: scroll;
+}
+
+.doc-section,
+.doc-subsection {
+	margin: 1em;
+}
+
+#main-banner,
+#main-subtitle {
+	font-family: "Courier New", Courier, monospace;
+	margin: 0;
+}
+
+body {
+	margin: 2em;
+	font-family: "Palatino", Georgia, "Times New Roman", Times, serif;
+	background-color: rgb(238, 230, 218);
+	display: flex;
+	flex-direction: column;
+}
+
+.header {
+	margin-bottom: 1em;
+}
+
+p {
+	width: 600px;
+}
+
+button {
+	width: 990px;
+}
