@@ -128,7 +128,7 @@ let overall = html`
 			<!-- <a href="/">Try it out</a>
 			<a href="/docs">Docs</a> -->
 		</div>
-		<p>Humongo is a little language for writing <a href="https://docs.mongodb.com/manual/aggregation/">MongoDB aggregation queries</a> a little more tersely. Not every Mongo feature is supported, but keep in mind that it is possible to write raw queries and interpolate them with Humongo. Scroll down for docs.<br /><br />Write your query here to compile to JS: </p>
+		<p>Humongo is a little language for writing <a href="https://docs.mongodb.com/manual/aggregation/">MongoDB aggregation queries</a> a little more tersely. Not every Mongo feature is supported, but keep in mind that it is possible to write raw queries and interpolate them with Humongo. Scroll down for docs. Use the compiler hosted here, or pull the source yourself from <a href="http://www.deno.land/x/humongo">Deno.land</a> or <a href="https://github.com/peetklecha/humongo">GitHub</a>.<br /><br />Write your query here to compile to JS: </p>
 		<textarea id="humongo">aggregate orders:
 	match purchase_date > @@2021-08-15, < @@2021-08-23
 	set line_item_ids = map({ input: line_items, in: $$this.product_id })
@@ -216,29 +216,3 @@ ${input}
 ${output}
 	</div>`
 }
-
-// for (const file of Deno.readDirSync('./dev/test/inputs')) {
-// 	const name = file.name.slice(0, -5)
-// 	console.group(`checking ${name}`)
-// 	if (existsSync(`./dev/test/outputs/${name}.js`)) {
-// 		console.log('found js output.')
-		// const input = Deno.readTextFileSync(`./dev/test/inputs/${file.name}`)
-		// const output = Deno.readTextFileSync(`./dev/test/outputs/${name}.js`)
-// 		console.log(`input file ${input.length} chars; output file ${output.length}`)
-// 		const html = `
-// 		<h3>${name.split('-').join(' ')}</h3>
-// 			<h4>Humongo input</h4>
-// 			<div class="humongo-example">
-// ${input}
-// 			</div>
-// 			<h4>JS/Mongo query language output</h4>
-// 			<div class="mongo-example">
-// ${output}
-// 			</div>
-// 			<br /><br />
-// 		`
-// 		overall += html;
-// 	}
-// 	console.groupEnd();
-// }
-

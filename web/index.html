@@ -16,7 +16,7 @@
 			<!-- <a href="/">Try it out</a>
 			<a href="/docs">Docs</a> -->
 		</div>
-		<p>Humongo is a little language for writing <a href="https://docs.mongodb.com/manual/aggregation/">MongoDB aggregation queries</a> a little more tersely. Not every Mongo feature is supported, but keep in mind that it is possible to write raw queries and interpolate them with Humongo. Scroll down for docs.<br /><br />Write your query here to compile to JS: </p>
+		<p>Humongo is a little language for writing <a href="https://docs.mongodb.com/manual/aggregation/">MongoDB aggregation queries</a> a little more tersely. Not every Mongo feature is supported, but keep in mind that it is possible to write raw queries and interpolate them with Humongo. Scroll down for docs. Use the compiler hosted here, or pull the source yourself from <a href="http://www.deno.land/x/humongo">Deno.land</a> or <a href="https://github.com/peetklecha/humongo">GitHub</a>.<br /><br />Write your query here to compile to JS: </p>
 		<textarea id="humongo">aggregate orders:
 	match purchase_date > @@2021-08-15, < @@2021-08-23
 	set line_item_ids = map({ input: line_items, in: $$this.product_id })

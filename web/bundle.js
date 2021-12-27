@@ -3,11 +3,11 @@ class Token {
     lexeme;
     literal;
     line;
-    constructor(type1, lexeme, literal1, line1){
-        this.type = type1;
+    constructor(type, lexeme, literal, line){
+        this.type = type;
         this.lexeme = lexeme;
-        this.literal = literal1;
-        this.line = line1;
+        this.literal = literal;
+        this.line = line;
     }
     toString() {
         return `${this.type} ${this.lexeme} ${this.literal}`;
@@ -16,9 +16,9 @@ class Token {
 class TabToken extends Token {
     line;
     count;
-    constructor(line2, count){
-        super(TokenType.TAB, '\t', null, line2);
-        this.line = line2;
+    constructor(line, count){
+        super(TokenType.TAB, '\t', null, line);
+        this.line = line;
         this.count = count;
     }
     increment() {
@@ -27,53 +27,53 @@ class TabToken extends Token {
     }
 }
 var TokenType;
-(function(TokenType1) {
-    TokenType1[TokenType1["LEFT_PAREN"] = 0] = "LEFT_PAREN";
-    TokenType1[TokenType1["RIGHT_PAREN"] = 1] = "RIGHT_PAREN";
-    TokenType1[TokenType1["LEFT_BRACE"] = 2] = "LEFT_BRACE";
-    TokenType1[TokenType1["RIGHT_BRACE"] = 3] = "RIGHT_BRACE";
-    TokenType1[TokenType1["COMMA"] = 4] = "COMMA";
-    TokenType1[TokenType1["DOT"] = 5] = "DOT";
-    TokenType1[TokenType1["MINUS"] = 6] = "MINUS";
-    TokenType1[TokenType1["PLUS"] = 7] = "PLUS";
-    TokenType1[TokenType1["SEMICOLON"] = 8] = "SEMICOLON";
-    TokenType1[TokenType1["SLASH"] = 9] = "SLASH";
-    TokenType1[TokenType1["STAR"] = 10] = "STAR";
-    TokenType1[TokenType1["BANG"] = 11] = "BANG";
-    TokenType1[TokenType1["BANG_EQUAL"] = 12] = "BANG_EQUAL";
-    TokenType1[TokenType1["GREATER"] = 13] = "GREATER";
-    TokenType1[TokenType1["GREATER_EQUAL"] = 14] = "GREATER_EQUAL";
-    TokenType1[TokenType1["LESS"] = 15] = "LESS";
-    TokenType1[TokenType1["LESS_EQUAL"] = 16] = "LESS_EQUAL";
-    TokenType1[TokenType1["IDENTIFIER"] = 17] = "IDENTIFIER";
-    TokenType1[TokenType1["STRING"] = 18] = "STRING";
-    TokenType1[TokenType1["NUMBER"] = 19] = "NUMBER";
-    TokenType1[TokenType1["AND"] = 20] = "AND";
-    TokenType1[TokenType1["ELSE"] = 21] = "ELSE";
-    TokenType1[TokenType1["TRUE"] = 22] = "TRUE";
-    TokenType1[TokenType1["FALSE"] = 23] = "FALSE";
-    TokenType1[TokenType1["IF"] = 24] = "IF";
-    TokenType1[TokenType1["NULL"] = 25] = "NULL";
-    TokenType1[TokenType1["OR"] = 26] = "OR";
-    TokenType1[TokenType1["EOF"] = 27] = "EOF";
-    TokenType1[TokenType1["EQUAL"] = 28] = "EQUAL";
-    TokenType1[TokenType1["EQUAL_EQUAL"] = 29] = "EQUAL_EQUAL";
-    TokenType1[TokenType1["TAB"] = 30] = "TAB";
-    TokenType1[TokenType1["BREAK"] = 31] = "BREAK";
-    TokenType1[TokenType1["COLON"] = 32] = "COLON";
-    TokenType1[TokenType1["BAR"] = 33] = "BAR";
-    TokenType1[TokenType1["BAR_BAR"] = 34] = "BAR_BAR";
-    TokenType1[TokenType1["NOT_EQUAL"] = 35] = "NOT_EQUAL";
-    TokenType1[TokenType1["IN"] = 36] = "IN";
-    TokenType1[TokenType1["NOT_IN"] = 37] = "NOT_IN";
-    TokenType1[TokenType1["MOD"] = 38] = "MOD";
-    TokenType1[TokenType1["LEFT_BRACKET"] = 39] = "LEFT_BRACKET";
-    TokenType1[TokenType1["RIGHT_BRACKET"] = 40] = "RIGHT_BRACKET";
-    TokenType1[TokenType1["QM"] = 41] = "QM";
-    TokenType1[TokenType1["OID"] = 42] = "OID";
-    TokenType1[TokenType1["DATE"] = 43] = "DATE";
-    TokenType1[TokenType1["AT_AT"] = 44] = "AT_AT";
-    TokenType1[TokenType1["JAVASCRIPT"] = 45] = "JAVASCRIPT";
+(function(TokenType) {
+    TokenType[TokenType["LEFT_PAREN"] = 0] = "LEFT_PAREN";
+    TokenType[TokenType["RIGHT_PAREN"] = 1] = "RIGHT_PAREN";
+    TokenType[TokenType["LEFT_BRACE"] = 2] = "LEFT_BRACE";
+    TokenType[TokenType["RIGHT_BRACE"] = 3] = "RIGHT_BRACE";
+    TokenType[TokenType["COMMA"] = 4] = "COMMA";
+    TokenType[TokenType["DOT"] = 5] = "DOT";
+    TokenType[TokenType["MINUS"] = 6] = "MINUS";
+    TokenType[TokenType["PLUS"] = 7] = "PLUS";
+    TokenType[TokenType["SEMICOLON"] = 8] = "SEMICOLON";
+    TokenType[TokenType["SLASH"] = 9] = "SLASH";
+    TokenType[TokenType["STAR"] = 10] = "STAR";
+    TokenType[TokenType["BANG"] = 11] = "BANG";
+    TokenType[TokenType["BANG_EQUAL"] = 12] = "BANG_EQUAL";
+    TokenType[TokenType["GREATER"] = 13] = "GREATER";
+    TokenType[TokenType["GREATER_EQUAL"] = 14] = "GREATER_EQUAL";
+    TokenType[TokenType["LESS"] = 15] = "LESS";
+    TokenType[TokenType["LESS_EQUAL"] = 16] = "LESS_EQUAL";
+    TokenType[TokenType["IDENTIFIER"] = 17] = "IDENTIFIER";
+    TokenType[TokenType["STRING"] = 18] = "STRING";
+    TokenType[TokenType["NUMBER"] = 19] = "NUMBER";
+    TokenType[TokenType["AND"] = 20] = "AND";
+    TokenType[TokenType["ELSE"] = 21] = "ELSE";
+    TokenType[TokenType["TRUE"] = 22] = "TRUE";
+    TokenType[TokenType["FALSE"] = 23] = "FALSE";
+    TokenType[TokenType["IF"] = 24] = "IF";
+    TokenType[TokenType["NULL"] = 25] = "NULL";
+    TokenType[TokenType["OR"] = 26] = "OR";
+    TokenType[TokenType["EOF"] = 27] = "EOF";
+    TokenType[TokenType["EQUAL"] = 28] = "EQUAL";
+    TokenType[TokenType["EQUAL_EQUAL"] = 29] = "EQUAL_EQUAL";
+    TokenType[TokenType["TAB"] = 30] = "TAB";
+    TokenType[TokenType["BREAK"] = 31] = "BREAK";
+    TokenType[TokenType["COLON"] = 32] = "COLON";
+    TokenType[TokenType["BAR"] = 33] = "BAR";
+    TokenType[TokenType["BAR_BAR"] = 34] = "BAR_BAR";
+    TokenType[TokenType["NOT_EQUAL"] = 35] = "NOT_EQUAL";
+    TokenType[TokenType["IN"] = 36] = "IN";
+    TokenType[TokenType["NOT_IN"] = 37] = "NOT_IN";
+    TokenType[TokenType["MOD"] = 38] = "MOD";
+    TokenType[TokenType["LEFT_BRACKET"] = 39] = "LEFT_BRACKET";
+    TokenType[TokenType["RIGHT_BRACKET"] = 40] = "RIGHT_BRACKET";
+    TokenType[TokenType["QM"] = 41] = "QM";
+    TokenType[TokenType["OID"] = 42] = "OID";
+    TokenType[TokenType["DATE"] = 43] = "DATE";
+    TokenType[TokenType["AT_AT"] = 44] = "AT_AT";
+    TokenType[TokenType["JAVASCRIPT"] = 45] = "JAVASCRIPT";
 })(TokenType || (TokenType = {
 }));
 const simpleQueryOperators = [
@@ -92,8 +92,8 @@ class Lexer {
     current = 0;
     start = 0;
     line = 1;
-    constructor(source1){
-        this.source = source1;
+    constructor(source){
+        this.source = source;
     }
     lex() {
         while(!this.isAtEnd){
@@ -297,8 +297,8 @@ class Lexer {
 }
 class Expression {
     content;
-    constructor(content1){
-        this.content = content1;
+    constructor(content){
+        this.content = content;
     }
     getInterpreted(generator) {
         return generator.interpretExpression(this);
@@ -307,9 +307,9 @@ class Expression {
 class Cast {
     expr;
     type;
-    constructor(expr1, type2){
-        this.expr = expr1;
-        this.type = type2;
+    constructor(expr, type){
+        this.expr = expr;
+        this.type = type;
     }
     getInterpreted(generator) {
         return generator.interpretCast(this);
@@ -319,10 +319,10 @@ class Equality {
     left;
     op;
     right;
-    constructor(left1, op1, right1){
-        this.left = left1;
-        this.op = op1;
-        this.right = right1;
+    constructor(left, op, right){
+        this.left = left;
+        this.op = op;
+        this.right = right;
     }
     getInterpreted(generator) {
         return generator.interpretEqualityExpr(this);
@@ -332,10 +332,10 @@ class Comparison {
     left;
     op;
     right;
-    constructor(left2, op2, right2){
-        this.left = left2;
-        this.op = op2;
-        this.right = right2;
+    constructor(left, op, right){
+        this.left = left;
+        this.op = op;
+        this.right = right;
     }
     getInterpreted(generator) {
         return generator.interpretComparisonExpr(this);
@@ -345,10 +345,10 @@ class Term {
     left;
     op;
     right;
-    constructor(left3, op3, right3){
-        this.left = left3;
-        this.op = op3;
-        this.right = right3;
+    constructor(left, op, right){
+        this.left = left;
+        this.op = op;
+        this.right = right;
     }
     getInterpreted(generator) {
         return generator.interpretTermExpr(this);
@@ -358,10 +358,10 @@ class Factor {
     left;
     op;
     right;
-    constructor(left4, op4, right4){
-        this.left = left4;
-        this.op = op4;
-        this.right = right4;
+    constructor(left, op, right){
+        this.left = left;
+        this.op = op;
+        this.right = right;
     }
     getInterpreted(generator) {
         return generator.interpretFactorExpr(this);
@@ -370,9 +370,9 @@ class Factor {
 class Unary {
     op;
     right;
-    constructor(op5, right5){
-        this.op = op5;
-        this.right = right5;
+    constructor(op, right){
+        this.op = op;
+        this.right = right;
     }
     getInterpreted(generator) {
         return generator.interpretUnaryExpr(this);
@@ -390,8 +390,8 @@ class Grouping {
 class Primary {
     value;
     verbatim;
-    constructor(value1, verbatim){
-        this.value = value1;
+    constructor(value, verbatim){
+        this.value = value;
         this.verbatim = verbatim;
     }
     getInterpreted(generator) {
@@ -410,9 +410,9 @@ class Identifier {
 class Invocation {
     func;
     args;
-    constructor(func1, args1){
-        this.func = func1;
-        this.args = args1;
+    constructor(func, args){
+        this.func = func;
+        this.args = args;
     }
     getInterpreted(generator) {
         return generator.interpretInvocation(this);
@@ -431,8 +431,8 @@ class Access {
 }
 class ObjectLiteral {
     entries;
-    constructor(entries1){
-        this.entries = entries1;
+    constructor(entries){
+        this.entries = entries;
     }
     getInterpreted(generator) {
         return generator.interpretObjectLiteral(this);
@@ -440,8 +440,8 @@ class ObjectLiteral {
 }
 class ArrayLiteral {
     entries;
-    constructor(entries2){
-        this.entries = entries2;
+    constructor(entries){
+        this.entries = entries;
     }
     getInterpreted(generator) {
         return generator.interpretArrayLiteral(this);
@@ -451,10 +451,10 @@ class Ternary {
     left;
     middle;
     right;
-    constructor(left5, middle, right6){
-        this.left = left5;
+    constructor(left, middle, right){
+        this.left = left;
         this.middle = middle;
-        this.right = right6;
+        this.right = right;
     }
     getInterpreted(generator) {
         return generator.interpretTernary(this);
@@ -464,10 +464,10 @@ class TopQO {
     left;
     op;
     right;
-    constructor(left6, op6, right7){
-        this.left = left6;
-        this.op = op6;
-        this.right = right7;
+    constructor(left, op, right){
+        this.left = left;
+        this.op = op;
+        this.right = right;
     }
     getInterpreted(generator) {
         return generator.interpretTopQO(this);
@@ -477,10 +477,10 @@ class DisjunctQO {
     left;
     op;
     right;
-    constructor(left7, op7, right8){
-        this.left = left7;
-        this.op = op7;
-        this.right = right8;
+    constructor(left, op, right){
+        this.left = left;
+        this.op = op;
+        this.right = right;
     }
     getInterpreted(generator) {
         return generator.interpretDisjunctQO(this);
@@ -489,9 +489,9 @@ class DisjunctQO {
 class ConjunctQO {
     op;
     right;
-    constructor(op8, right9){
-        this.op = op8;
-        this.right = right9;
+    constructor(op, right){
+        this.op = op;
+        this.right = right;
     }
     getInterpreted(generator) {
         return generator.interpretConjunctQO(this);
@@ -499,8 +499,8 @@ class ConjunctQO {
 }
 class GroupingQO {
     content;
-    constructor(content2){
-        this.content = content2;
+    constructor(content){
+        this.content = content;
     }
     getInterpreted(generator) {
         return generator.interpretGroupingQO(this);
@@ -523,12 +523,12 @@ const operators = {
     AGGREGATE: "aggregate",
     ...stages
 };
-class File1 {
+class File {
     collection;
     body;
-    constructor(collection1, body1){
-        this.collection = collection1;
-        this.body = body1;
+    constructor(collection, body){
+        this.collection = collection;
+        this.body = body;
     }
     getInterpreted(generator, indent) {
         return generator.interpretFile(this, indent);
@@ -546,25 +546,20 @@ class Body {
 class Stage {
     head;
     body;
-    constructor(head, body2){
+    constructor(head, body){
         this.head = head;
-        this.body = body2;
+        this.body = body;
     }
     getInterpreted(generator, indent) {
         return generator.interpretStage(this, indent);
     }
 }
-class MatchStage extends Stage {
-    constructor(head1, body3){
-        super(head1, body3);
-    }
-}
 class SetStage {
     id;
     value;
-    constructor(id1, value2){
-        this.id = id1;
-        this.value = value2;
+    constructor(id, value){
+        this.id = id;
+        this.value = value;
     }
     getInterpreted(generator, indent) {
         return generator.interpretSetStage(this, indent);
@@ -573,25 +568,20 @@ class SetStage {
 class FieldsStage {
     fields;
     type;
-    constructor(fields, type3){
+    constructor(fields, type){
         this.fields = fields;
-        this.type = type3;
+        this.type = type;
     }
     getInterpreted(generator, indent) {
         return generator.interpretFieldsStage(this, indent);
     }
 }
-class ComplexStage extends Stage {
-    constructor(head2, body4){
-        super(head2, body4);
-    }
-}
 class QuerySubStage {
     id;
     body;
-    constructor(id2, body5){
-        this.id = id2;
-        this.body = body5;
+    constructor(id, body){
+        this.id = id;
+        this.body = body;
     }
     getInterpreted(generator, indent) {
         return generator.interpretQuerySubStage(this, indent);
@@ -602,8 +592,8 @@ class ImportSpec {
     localField;
     foreignField;
     alias;
-    constructor(collection2, localField, foreignField, alias){
-        this.collection = collection2;
+    constructor(collection, localField, foreignField, alias){
+        this.collection = collection;
         this.localField = localField;
         this.foreignField = foreignField;
         this.alias = alias;
@@ -625,12 +615,12 @@ function* zip(it1, it2) {
     const iterator1 = it1[Symbol.iterator]();
     const iterator2 = it2[Symbol.iterator]();
     while(true){
-        const { done: done1 , value: value11  } = iterator1.next();
-        const { done: done2 , value: value21  } = iterator2.next();
+        const { done: done1 , value: value1  } = iterator1.next();
+        const { done: done2 , value: value2  } = iterator2.next();
         if (done1 && done2) break;
         yield [
-            value11,
-            value21
+            value1,
+            value2
         ];
     }
 }
@@ -638,8 +628,8 @@ class Parser {
     tokens;
     indent = 0;
     current = 0;
-    constructor(tokens1){
-        this.tokens = tokens1;
+    constructor(tokens){
+        this.tokens = tokens;
     }
     parse() {
         try {
@@ -651,10 +641,10 @@ class Parser {
     }
     file() {
         if (this.matchContent(operators.AGGREGATE)) {
-            const collection3 = this.expression();
-            if (collection3 instanceof Identifier) {
-                const body6 = this.body();
-                return new File1(collection3.name, body6);
+            const collection = this.expression();
+            if (collection instanceof Identifier) {
+                const body = this.body();
+                return new File(collection.name, body);
             } else throw new Error('`aggregate` must be followed by an identifier.');
         } else {
             console.log(this);
@@ -680,9 +670,9 @@ class Parser {
         } else throw new Error(`Expected ${this.indent + 1} indents after return, found ${this.next instanceof TabToken ? this.next.count : `non-tab: ${this.next.lexeme}`}.`);
     }
     body() {
-        const stages1 = comap(this.block(), ()=>this.stage()
+        const stages = comap(this.block(), ()=>this.stage()
         );
-        return new Body(stages1);
+        return new Body(stages);
     }
     stage() {
         if (this.check(TokenType.JAVASCRIPT)) {
@@ -716,51 +706,51 @@ class Parser {
         }
     }
     unwindStage() {
-        const id3 = this.identifier();
-        return new Stage('unwind', id3);
+        const id = this.identifier();
+        return new Stage('unwind', id);
     }
     sortStage() {
-        const stages1 = comap(this.block(), ()=>this.sortSubStage()
+        const stages = comap(this.block(), ()=>this.sortSubStage()
         );
-        return new Stage('sort', stages1);
+        return new Stage('sort', stages);
     }
     sortSubStage() {
-        const id3 = this.identifier();
+        const id = this.identifier();
         let dir;
         if (this.matchContent("asc")) dir = "1";
         else if (this.matchContent("desc")) dir = "-1";
         else if (this.matchContent("text")) dir = '{ $meta: "textScore" }';
         else throw new Error("invalid sort stage");
-        return new SetStage(id3.name, new Primary(dir, true));
+        return new SetStage(id.name, new Primary(dir, true));
     }
     groupStage() {
         this.consumeContent(()=>`Invalid group stage. Syntax is: 'group by <expression>:'`
         , 'by');
         const _id = this.expression();
-        const stages1 = comap(this.block(), ()=>this.setSubStage()
+        const stages = comap(this.block(), ()=>this.setSubStage()
         );
         return new Stage('group', [
             new SetStage("_id", _id),
-            ...stages1
+            ...stages
         ]);
     }
     countStage() {
-        let alias1 = "count";
+        let alias = "count";
         if (this.matchContent("as")) {
-            const id3 = this.identifier();
-            alias1 = id3.name;
+            const id = this.identifier();
+            alias = id.name;
         } else if (this.matchContent("by")) {
-            const expr1 = this.expression();
-            return new Stage('sortByCount', expr1);
+            const expr = this.expression();
+            return new Stage('sortByCount', expr);
         }
-        return new Stage('count', new Primary(alias1));
+        return new Stage('count', new Primary(alias));
     }
     importOneStage() {
         const importStage = this.importStage();
         const importSpec = importStage.body;
         const idString = importSpec.alias || importSpec.collection;
-        const id3 = new Identifier(idString);
-        const rhsValue = new Access(id3, new Primary(0));
+        const id = new Identifier(idString);
+        const rhsValue = new Access(id, new Primary(0));
         return [
             importStage,
             new Stage('set', [
@@ -770,16 +760,16 @@ class Parser {
     }
     importStage() {
         const first = this.identifier();
-        let collection3, foreign, local, alias1;
-        if (this.matchContent('from')) [collection3, alias1] = [
+        let collection, foreign, local, alias;
+        if (this.matchContent('from')) [collection, alias] = [
             this.identifier(),
             first
         ];
-        else collection3 = first;
+        else collection = first;
         if (this.matchContent('by')) foreign = this.identifier();
         if (this.matchContent('using')) local = this.identifier();
         if (!this.check(TokenType.BREAK)) throw new Error("invalid import stage");
-        const spec = new ImportSpec(collection3.name, local?.name, foreign?.name, alias1?.name);
+        const spec = new ImportSpec(collection.name, local?.name, foreign?.name, alias?.name);
         return new Stage('lookup', spec);
     }
     projectStage() {
@@ -795,21 +785,21 @@ class Parser {
         }
     }
     projectSubStage() {
-        const id3 = this.consume(TokenType.IDENTIFIER, (str)=>`Expected identifier, found ${str}`
+        const id = this.consume(TokenType.IDENTIFIER, (str)=>`Expected identifier, found ${str}`
         );
         if (this.match(TokenType.EQUAL)) {
-            const value3 = this.expression();
-            return new SetStage(id3.lexeme, value3);
+            const value = this.expression();
+            return new SetStage(id.lexeme, value);
         } else if (this.check(TokenType.COMMA)) {
             const ids = [
-                id3
+                id
             ];
             while(this.match(TokenType.COMMA)){
                 const nextId = this.consume(TokenType.IDENTIFIER, (str)=>`Expected identifier, found ${str}`
                 );
                 ids.push(nextId);
             }
-            return new FieldsStage(ids.map((id4)=>id4.lexeme
+            return new FieldsStage(ids.map((id)=>id.lexeme
             ), 'project');
         }
         throw new Error('Invalid project stage.');
@@ -832,16 +822,16 @@ class Parser {
         }
     }
     setSubStage() {
-        const id3 = this.consume(TokenType.IDENTIFIER, (str)=>`Expected identifier, found ${str}`
+        const id = this.consume(TokenType.IDENTIFIER, (str)=>`Expected identifier, found ${str}`
         );
         this.consume(TokenType.EQUAL, ()=>`Expected equal sign.`
         );
-        const value3 = this.expression();
-        return new SetStage(id3.lexeme, value3);
+        const value = this.expression();
+        return new SetStage(id.lexeme, value);
     }
     matchIf() {
-        const expr1 = this.expression();
-        return new Stage("match", new Expression(expr1));
+        const expr = this.expression();
+        return new Stage("match", new Expression(expr));
     }
     matchStage() {
         if (this.check(TokenType.COLON)) {
@@ -856,64 +846,64 @@ class Parser {
         }
     }
     matchSubstage() {
-        const id3 = this.consume(TokenType.IDENTIFIER, (str)=>`Expected idnetifier, found ${str}`
+        const id = this.consume(TokenType.IDENTIFIER, (str)=>`Expected idnetifier, found ${str}`
         );
-        const body6 = this.expressionQO();
-        return new QuerySubStage(id3, body6);
+        const body = this.expressionQO();
+        return new QuerySubStage(id, body);
     }
     expressionQO() {
-        let expr1 = this.disjunctQO();
+        let expr = this.disjunctQO();
         while(this.match(TokenType.BAR_BAR)){
             const operator = this.previous;
-            const right10 = this.disjunctQO();
-            expr1 = new TopQO(expr1, operator, right10);
+            const right = this.disjunctQO();
+            expr = new TopQO(expr, operator, right);
         }
-        return expr1;
+        return expr;
     }
     disjunctQO() {
-        let expr1 = this.conjunctQO();
+        let expr = this.conjunctQO();
         while(this.match(TokenType.COMMA)){
             const operator = this.previous;
-            const right10 = this.conjunctQO();
-            expr1 = new DisjunctQO(expr1, operator, right10);
+            const right = this.conjunctQO();
+            expr = new DisjunctQO(expr, operator, right);
         }
-        return expr1;
+        return expr;
     }
     conjunctQO() {
         if (this.match(TokenType.LEFT_PAREN)) {
-            const expr1 = this.expressionQO();
+            const expr = this.expressionQO();
             this.consume(TokenType.RIGHT_PAREN, (str)=>`Expected ")", found ${str}`
             );
-            return new GroupingQO(expr1);
+            return new GroupingQO(expr);
         } else if (this.match(...simpleQueryOperators)) {
             const operator = this.previous;
-            const right10 = [
+            const right = [
                 TokenType.IN,
                 TokenType.NOT_IN
             ].includes(operator.type) ? this.arrayLiteral(false) : this.literal();
-            return new ConjunctQO(operator, right10);
+            return new ConjunctQO(operator, right);
         } else {
             throw new Error('Expected query statement.');
         }
     }
     expression() {
-        const expr1 = this.castable();
+        const expr = this.castable();
         if (this.match(TokenType.QM)) {
-            const middle1 = this.castable();
+            const middle = this.castable();
             this.consume(TokenType.COLON, (str)=>`Expected :, found ${str}`
             );
-            const right10 = this.castable();
-            return new Ternary(expr1, middle1, right10);
-        } else return expr1;
+            const right = this.castable();
+            return new Ternary(expr, middle, right);
+        } else return expr;
     }
     castable() {
-        const expr1 = this.equality();
+        const expr = this.equality();
         if (this.matchContent("as")) {
-            const { lexeme: lexeme1  } = this.consume(TokenType.IDENTIFIER, (str)=>`Expected type identifier, found ${str}`
+            const { lexeme  } = this.consume(TokenType.IDENTIFIER, (str)=>`Expected type identifier, found ${str}`
             );
-            return new Cast(expr1, lexeme1);
+            return new Cast(expr, lexeme);
         }
-        return expr1;
+        return expr;
     }
     equality() {
         return this.rightAssociative(this.comparison, Equality, TokenType.BANG_EQUAL, TokenType.EQUAL_EQUAL);
@@ -938,8 +928,8 @@ class Parser {
     unary() {
         if (this.match(TokenType.BANG, TokenType.MINUS)) {
             const operator = this.previous;
-            const right10 = this.unary();
-            return new Unary(operator, right10);
+            const right = this.unary();
+            return new Unary(operator, right);
         }
         return this.primary();
     }
@@ -955,23 +945,23 @@ class Parser {
     }
     primary() {
         if (this.match(TokenType.LEFT_PAREN)) {
-            const expr1 = this.expression();
+            const expr = this.expression();
             this.consume(TokenType.RIGHT_PAREN, (str)=>`Expect ')' after expression, found ${str}`
             );
-            return new Grouping(expr1);
+            return new Grouping(expr);
         } else if (this.match(TokenType.LEFT_BRACE)) {
             this.allowWhitespace();
-            const entries3 = [
+            const entries = [
                 this.keyValuePair()
             ];
             while(this.match(TokenType.COMMA)){
                 this.allowWhitespace();
-                entries3.push(this.keyValuePair());
+                entries.push(this.keyValuePair());
             }
             this.allowWhitespace();
             this.consume(TokenType.RIGHT_BRACE, (str)=>`Expected closing } for object literal, found ${str}`
             );
-            return new ObjectLiteral(entries3);
+            return new ObjectLiteral(entries);
         } else if (this.match(TokenType.LEFT_BRACKET)) {
             return this.arrayLiteral(true);
         } else {
@@ -986,43 +976,43 @@ class Parser {
         if (!bracketAlreadyConsumed) this.consume(TokenType.LEFT_BRACKET, (str)=>`Expected [, found ${str}`
         );
         this.allowWhitespace();
-        const entries3 = [
+        const entries = [
             this.expression()
         ];
         while(this.match(TokenType.COMMA)){
             this.allowWhitespace();
-            entries3.push(this.expression());
+            entries.push(this.expression());
         }
         this.allowWhitespace();
         this.consume(TokenType.RIGHT_BRACKET, (str)=>`Expected closing ] for array literal, found ${str}`
         );
-        return new ArrayLiteral(entries3);
+        return new ArrayLiteral(entries);
     }
     keyValuePair() {
         const key = this.identifier();
         this.consume(TokenType.COLON, (str)=>`Expected colon, found ${str}`
         );
-        const expr1 = this.expression();
+        const expr = this.expression();
         return [
             key.name,
-            expr1
+            expr
         ];
     }
     identifierOrInvocation() {
         const token = this.advance();
         if (this.match(TokenType.LEFT_PAREN)) {
-            const args1 = [
+            const args = [
                 this.expression()
             ];
-            while(this.match(TokenType.COMMA))args1.push(this.expression());
+            while(this.match(TokenType.COMMA))args.push(this.expression());
             this.consume(TokenType.RIGHT_PAREN, (str)=>`Expect ')' after expression, found ${str}`
             );
-            return new Invocation(token.lexeme, args1);
+            return new Invocation(token.lexeme, args);
         } else if (this.match(TokenType.LEFT_BRACKET)) {
-            const index1 = this.expression();
+            const index = this.expression();
             this.consume(TokenType.RIGHT_BRACKET, (str)=>`Expected ']', found ${str}`
             );
-            return new Access(new Identifier(token.lexeme), index1);
+            return new Access(new Identifier(token.lexeme), index);
         }
         return new Identifier(token.lexeme);
     }
@@ -1031,17 +1021,17 @@ class Parser {
         return new Identifier(token.lexeme);
     }
     rightAssociative(constituent, ExprType, ...tokens) {
-        let expr1 = constituent.call(this);
+        let expr = constituent.call(this);
         while(this.match(...tokens)){
             const operator = this.previous;
-            const right10 = constituent.call(this);
-            expr1 = new ExprType(expr1, operator, right10);
+            const right = constituent.call(this);
+            expr = new ExprType(expr, operator, right);
         }
-        return expr1;
+        return expr;
     }
     match(...types) {
-        for (const type4 of types){
-            if (this.check(type4)) {
+        for (const type of types){
+            if (this.check(type)) {
                 this.advance();
                 return true;
             }
@@ -1049,8 +1039,8 @@ class Parser {
         return false;
     }
     matchContent(...contents) {
-        for (const content3 of contents){
-            if (this.checkContent(content3)) {
+        for (const content of contents){
+            if (this.checkContent(content)) {
                 this.advance();
                 return true;
             }
@@ -1112,23 +1102,23 @@ class BMQLGenerator {
         if (Array.isArray(stage.body)) {
             const output = stage.body.map((qss)=>`${this.interpret(qss, indent + 1)},\n`
             );
-            output.unshift(`${'\t'.repeat(indent)}${heads.map((head3)=>`{ $${head3}:`
+            output.unshift(`${'\t'.repeat(indent)}${heads.map((head)=>`{ $${head}:`
             ).join(' ')} {\n`);
             output.push('\t'.repeat(indent) + '} '.repeat(heads.length + 1).trim());
             return output.join('');
         } else {
             let output = this.interpret(stage.body, indent);
-            for (const head3 of heads.reverse()){
-                if (!BMQLGenerator.LITERAL_STAGES.includes(head3)) output = `{${margin(output)}}`;
-                output = `{ $${head3}:${margin(output)}}`;
+            for (const head of heads.reverse()){
+                if (!BMQLGenerator.LITERAL_STAGES.includes(head)) output = `{${margin(output)}}`;
+                output = `{ $${head}:${margin(output)}}`;
             }
             return `${"\t".repeat(indent)}${output}`;
         }
     }
     interpretQuerySubStage(query, indent) {
-        let { lexeme: lexeme1  } = query.id;
-        if (lexeme1.includes('.')) lexeme1 = `"${lexeme1}"`;
-        return '\t'.repeat(indent) + `${lexeme1}: ${this.interpret(query.body, indent)}`;
+        let { lexeme  } = query.id;
+        if (lexeme.includes('.')) lexeme = `"${lexeme}"`;
+        return '\t'.repeat(indent) + `${lexeme}: ${this.interpret(query.body, indent)}`;
     }
     interpretPrimaryExpr(expr) {
         if (expr.verbatim) return `${expr.value}`;
@@ -1197,20 +1187,20 @@ class BMQLGenerator {
         }
     }
     interpretComparisonExpr(expr) {
-        const body6 = `[${this.interpret(expr.left)}, ${this.interpret(expr.right)}]`;
+        const body = `[${this.interpret(expr.left)}, ${this.interpret(expr.right)}]`;
         switch(expr.op.type){
             case TokenType.LESS:
-                return `{ $lt: ${body6} }`;
+                return `{ $lt: ${body} }`;
             case TokenType.LESS_EQUAL:
-                return `{ $lte: ${body6} }`;
+                return `{ $lte: ${body} }`;
             case TokenType.GREATER:
-                return `{ $gt: ${body6} }`;
+                return `{ $gt: ${body} }`;
             case TokenType.GREATER_EQUAL:
-                return `{ $gte: ${body6} }`;
+                return `{ $gte: ${body} }`;
             case TokenType.IN:
-                return `{ $in: ${body6} }`;
+                return `{ $in: ${body} }`;
             case TokenType.NOT_IN:
-                return `{ $not: { $in: ${body6} } }`;
+                return `{ $not: { $in: ${body} } }`;
             default:
                 throw "this shouldn't happen";
         }
@@ -1230,9 +1220,9 @@ class BMQLGenerator {
         return `$expr: ${this.interpret(expr.content)}`;
     }
     interpretSetStage(expr, indent) {
-        let { id: id3  } = expr;
-        if (id3.includes(".")) id3 = `"${id3}"`;
-        return '\t'.repeat(indent) + `${id3}: ${this.interpret(expr.value)}`;
+        let { id  } = expr;
+        if (id.includes(".")) id = `"${id}"`;
+        return '\t'.repeat(indent) + `${id}: ${this.interpret(expr.value)}`;
     }
     interpretFieldsStage(expr, indent) {
         switch(expr.type){
@@ -1248,22 +1238,22 @@ class BMQLGenerator {
     }
     invocation(func, args, defs = BMQLGenerator.FUNCS) {
         if (func in defs) {
-            const value3 = defs[func];
-            if (!value3) throw "this shouldn't happen";
-            if (value3 === 'single') {
+            const value = defs[func];
+            if (!value) throw "this shouldn't happen";
+            if (value === 'single') {
                 const [arg, ...rest] = args;
                 if (!arg) throw new Error(`Function ${func} expects 1 argument, found 0.`);
                 if (rest.length) throw new Error(`Function ${func} expects 1 argument, found ${rest.length}`);
                 return `{ $${func}: ${this.interpret(arg)} }`;
-            } else if (typeof value3 === 'number') {
+            } else if (typeof value === 'number') {
                 const { length  } = args;
-                if (length !== value3 && value3 !== Infinity) throw new Error(`Function ${func} expects ${value3} argument, found ${length}.`);
+                if (length !== value && value !== Infinity) throw new Error(`Function ${func} expects ${value} argument, found ${length}.`);
                 const rhs = length ? `[${args.map((arg)=>this.interpret(arg)
                 ).join(', ')}]` : '{}';
                 return `{ $${func}: ${rhs} }`;
-            } else if (Array.isArray(value3)) {
+            } else if (Array.isArray(value)) {
                 const outputArgs = [];
-                for (const [def, val] of zip(value3, args)){
+                for (const [def, val] of zip(value, args)){
                     if (!val) {
                         if (def === REQUIRED) throw new Error(`Required argument omitted from ${func}`);
                         outputArgs.push(`${def}`);
@@ -1271,17 +1261,17 @@ class BMQLGenerator {
                 }
                 return ` $${func}: [${outputArgs.map((thing)=>typeof thing === 'string' ? thing : this.interpret(thing)
                 )}]`;
-            } else if (isDetailedFuncSpec(value3)) {
-                const { args: argNum = Infinity , alias: alias1 = func , argStyle  } = value3;
-                return this.invocation(alias1, args, {
-                    [alias1]: argStyle === "double" ? argNum : "single"
+            } else if (isDetailedFuncSpec(value)) {
+                const { args: argNum = Infinity , alias =func , argStyle  } = value;
+                return this.invocation(alias, args, {
+                    [alias]: argStyle === "double" ? argNum : "single"
                 });
             } else {
-                if (value3.overloads.includes(args.length)) {
+                if (value.overloads.includes(args.length)) {
                     return this.invocation(func, args, {
                         [func]: args.length
                     });
-                } else throw new Error(`Function ${func} expected ${value3.overloads.join('/')} arguments, found ${args.length}`);
+                } else throw new Error(`Function ${func} expected ${value.overloads.join('/')} arguments, found ${args.length}`);
             }
         } else throw new Error(`Function ${func} is not defined.`);
     }
@@ -1292,7 +1282,7 @@ class BMQLGenerator {
         return `{ $to${expr.type}: ${this.interpret(expr.expr)} }`;
     }
     interpretObjectLiteral(expr) {
-        const intermediate = `{ ${expr.entries.map(([key, value3])=>`${key}: ${this.interpret(value3)}`
+        const intermediate = `{ ${expr.entries.map(([key, value])=>`${key}: ${this.interpret(value)}`
         ).join(', ')} }`;
         if (expr.entries.some(([key])=>key.startsWith("$")
         )) return `{ $literal: ${intermediate} }`;
@@ -1454,16 +1444,16 @@ function margin(str) {
 }
 class Humongo {
     static runFile(target, verbose = false) {
-        if (typeof Deno === 'undefined') throw new Error(`Can't access file-system!`);
-        const source1 = Deno.readTextFileSync(target);
-        return this.run(source1, verbose);
+        if (typeof Deno === 'undefined') throw new Error(`File system access only available with the Deno runtime -- you are either attempting to access the file system from the browser or using node.js!`);
+        const source = Deno.readTextFileSync(target);
+        return this.run(source, verbose);
     }
     static run(source, verbose = false) {
         if (verbose) console.log(source);
         const lexer = new Lexer(source);
-        const tokens2 = lexer.lex();
-        if (verbose) console.log(tokens2);
-        const parser = new Parser(tokens2);
+        const tokens = lexer.lex();
+        if (verbose) console.log(tokens);
+        const parser = new Parser(tokens);
         const tree = parser.parse();
         if (verbose) console.log(tree);
         const generator = new BMQLGenerator();
